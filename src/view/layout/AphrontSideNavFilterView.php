@@ -156,10 +156,20 @@ final class AphrontSideNavFilterView extends AphrontView {
     return $this->baseURI;
   }
 
-  public function selectFilter($key, $default = null) {
+  public function selectFilter($key, $default = null, AphrontRequest $request = null) {
     $this->selectedFilter = $default;
     if ($this->menu->getItem($key) && strlen($key)) {
       $this->selectedFilter = $key;
+    }
+
+    if ($request) {
+      $path = $request->getRequestURI()->getPath();
+      foreach ($this->menu->getItems() as $item) {
+        if ($item->getType() == PHUIListItemView::TYPE_LINK && $item->getHref() == $path) {
+          $this->selectedFilter = $item->getKey();
+          break;
+        }
+      }
     }
     return $this->selectedFilter;
   }

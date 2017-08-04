@@ -6,7 +6,8 @@ abstract class PhabricatorProjectBoardController
   protected function getProfileMenu() {
     $menu = parent::getProfileMenu();
 
-    $menu->selectFilter(PhabricatorProject::ITEM_WORKBOARD);
+    $request = $this->getRequest();
+    $menu->selectFilter(PhabricatorProject::ITEM_WORKBOARD, null, $request);
     $menu->addClass('project-board-nav');
 
     return $menu;
