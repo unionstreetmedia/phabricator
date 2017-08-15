@@ -84,7 +84,8 @@ final class ProjectBoardTaskCard extends Phobject {
         ->setIcon('fa-pencil')
         ->addSigil('edit-project-card')
         ->setHref('/maniphest/task/edit/'.$task->getID().'/'))
-      ->setBarColor($bar_color);
+      ->setBarColor($bar_color)
+      ->setIcon(ManiphestTaskStatus::getStatusIcon($task->getStatus()));
 
     if ($owner) {
       $card->addHandleIcon($owner, $owner->getName());
