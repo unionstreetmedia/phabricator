@@ -165,12 +165,14 @@ final class AphrontSideNavFilterView extends AphrontView {
     if ($request) {
       $path = $request->getRequestURI()->getPath();
       foreach ($this->menu->getItems() as $item) {
-        if ($item->getType() == PHUIListItemView::TYPE_LINK && $item->getHref() == $path) {
+        $is_link = ($item->getType() == PHUIListItemView::TYPE_LINK);
+        if ($is_link && $item->getHref() == $path) {
           $this->selectedFilter = $item->getKey();
           break;
         }
       }
     }
+
     return $this->selectedFilter;
   }
 
